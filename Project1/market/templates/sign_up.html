@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GfG</title>
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend>Personal Details</legend>
+        <p>
+            <label for="salutation">Salutation <br>
+                <select name="salutation" id="salutation">
+                    <option>--None--</option>
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                    <option>Mrs.</option>
+                    <option>Dr.</option>
+                    <option>Prof.</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <label for="firstName">First name: <input type="text" id="firstName" name="firstName"></label>
+        </p>
+        <p>
+            <label for="lastName">Last name: <input type="text" id="lastName" name="lastName"></label>
+        </p>
+        <p>
+            Gender:
+            <label for="male"><input type="radio" id="male" name="gender" value="male"> Male</label>
+            <label for="female"><input type="radio" id="female" name="gender" value="female"> Female</label>
+        </p>
+        <p>
+            <label for="email">Email: <input type="email" id="email" name="email"></label>
+        </p>
+        <p>
+            <label for="birthDate">Date of Birth: <input type="date" id="birthDate" name="birthDate"></label>
+        </p>
+        <p>
+            <label for="address">Address: <br>
+                <textarea name="address" id="address" cols="30" rows="3"></textarea>
+            </label>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </fieldset>
+</form>
+</body>
+</html>

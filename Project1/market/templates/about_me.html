@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+#about {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+#about h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#about p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+#about a {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+#about a:hover {
+  background-color: #0062cc;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Specific section styles */
+.about-section {
+    background-color: #f9f9f9;
+    padding: 40px;
+}
+
+.new-section {
+    background-color: #fff;
+    padding: 40px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Set the background color of the body element */
+  body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Style the header section */
+  header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+
+  nav li {
+    color: #000;
+    margin-right: 20px;
+  }
+
+  nav a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  /* Style the main section */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  li img {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  li h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  li p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #666;
+  }
+  /* Style the footer section */
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
+
+  footer p {
+    margin: 0;
+  }
+</style>
+
+<br>
+<br>
+<br>
+<br>
+<section id="about">
+  <h2>Про мене</h2>
+  <p>Привіт! Мене звати Павлов Олег і мені всього лише 15 років. Усе життя я проживаю у невеликому місті Шпола, розташованому в Черкаській області.</p>
+  <p>За останні два роки я віддавав свій час та енергію навчанню програмування на мові Python у школі GoIteens. Тут я знайшов своє покликання та отримав неймовірний досвід, що дозволив мені швидко розвиватися та вдосконалювати свої навички.</p>
+  <p>Моя мрія - створювати інноваційні програмні рішення, які змінюватимуть світ навколо нас. І я вже на шляху до її втілення.</p>
+  <p>Крім цього, я маю чудових друзів, які завжди готові підтримати мене у будь-яких починаннях. Вони - моя невичерпна джерельна сила і натхнення.</p>
+  <p>Завітайте на мій веб-сайт, щоб дізнатися більше про мої досягнення та мою творчість!</p>
+</section>
+
+
+<h2>Musician Table</h2>
+<table border="1">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Instrument</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>Guitar</td>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Smith</td>
+    <td>Piano</td>
+  </tr>
+  <tr>
+    <td>Michael</td>
+    <td>Johnson</td>
+    <td>Drums</td>
+  </tr>
+  <tr>
+    <td>Emily</td>
+    <td>Williams</td>
+    <td>Violin</td>
+  </tr>
+  <tr>
+    <td>David</td>
+    <td>Brown</td>
+    <td>Bass</td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<h2>Album Table</h2>
+<table border="1">
+  <tr>
+    <th>Artist</th>
+    <th>Name</th>
+    <th>Release Date</th>
+    <th>Number of Stars</th>
+  </tr>
+  <tr>
+    <td>The Beatles</td>
+    <td>Abbey Road</td>
+    <td>1969-09-26</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>Michael Jackson</td>
+    <td>Thriller</td>
+    <td>1982-11-30</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>Pink Floyd</td>
+    <td>The Dark Side of the Moon</td>
+    <td>1973-03-01</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>Queen</td>
+    <td>A Night at the Opera</td>
+    <td>1975-11-21</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>The Rolling Stones</td>
+    <td>Exile on Main St.</td>
+    <td>1972-05-12</td>
+    <td>5</td>
+  </tr>
+</table>
+
+
+<footer>
+    <p>&copy; 2023 My Shop</p>
+</footer>
+{% endblock %}
