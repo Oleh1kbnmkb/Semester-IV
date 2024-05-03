@@ -1,4 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+<!--Сторінка логонізації-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 * {
   margin: 0;
@@ -112,3 +126,33 @@ body {
 .register-link p a:hover {
   text-decoration: underline;
 }
+
+</style>
+
+
+<div class="wrapper">
+    <form action="/login" method="post">
+        <h1>Увійти</h1>
+        <div class="input-box">
+            <input type="text" id="username" name="username" placeholder="Прізвище та ім'я"
+                   required>
+                    <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" name="password" placeholder="Пароль"
+                   required>
+                    <i class='bx bxs-lock-alt' ></i>
+        </div>
+        <div class="remember-forgot">
+            <label>
+                <input type="checkbox">
+                Запам'ятати мене
+            </label>
+        </div>
+        <button type="button" onclick="window.location.href='home'" class="btn">Увійти</button>
+
+    </form>
+</div>
+
+</body>
+</html>

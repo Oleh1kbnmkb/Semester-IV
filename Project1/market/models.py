@@ -3,7 +3,14 @@ from django.db import models
 
 
 class Musician(models.Model):
-    first_name = models.CharField(max_length=50)
+    FIRST_NAME = {
+        "A": "Alexander",
+        "B": "Rimma",
+        "C": "Oleg",
+        "D": "Timofey"
+    }
+
+    first_name = models.CharField(max_length=1, choices=FIRST_NAME)
     last_name = models.CharField(max_length=50)
     instrument = models.CharField(max_length=100)
 
@@ -12,13 +19,19 @@ class Musician(models.Model):
 
 
 class Album(models.Model):
+    NUM_STARS = {
+        "1": "⭐",
+        "2": "⭐⭐",
+        "3": "⭐⭐⭐",
+        "4": "⭐⭐⭐⭐",
+        "5": "⭐⭐⭐⭐⭐"
+    }
     artist = models.ForeignKey(Musician, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     release_date = models.DateField()
-    num_stars = models.IntegerField()
+    num_stars = models.IntegerField(choices=NUM_STARS)
 
-    def str(self):
-        return self.name
+
 
 
 class Person(models.Model):
@@ -44,7 +57,14 @@ class Class(models.Model):
 
 
 class PersonalInfo(models.Model):
-    first_name = models.CharField(max_length=255)
+    FIRST_NAME = {
+        "A": "Alexander",
+        "B": "Rimma",
+        "C": "Oleg",
+        "D": "Timofey"
+    }
+
+    first_name = models.CharField(max_length=1, choices=FIRST_NAME)
     last_name = models.CharField(max_length=255)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
@@ -100,3 +120,55 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} - {self.product.name}"
+
+
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+    student_card_number = models.CharField(max_length=20)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.name} {self.surname}"
+
+
+
+class StudentGroup(models.Model):
+    group_number = models.CharField(max_length=10)
+    password = models.CharField(max_length=50)
+    meeting_room = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.group_number
+
+
+
+class LibraryCard(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    issue_date = models.DateField()
+    expiration_date = models.DateField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Library Card for {self.student}"
+
+
+
+class LibraryLiterature(models.Model):
+    title = models.CharField(max_length=200)
+    genre = models.CharField(max_length=100)
+    publication_date = models.DateField()
+    year = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.title
+
+
+
+class BookBorrowingProcess(models.Model):
+    library_card = models.ForeignKey(LibraryCard, on_delete=models.CASCADE)
+    literature = models.ForeignKey(LibraryLiterature, on_delete=models.CASCADE)
+    borrowing_date = models.DateField()
+    giver_name = models.CharField(max_length=200)
