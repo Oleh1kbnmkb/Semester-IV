@@ -1,20 +1,12 @@
 from django.contrib import admin
-from .models import Musician, Album, Person, School, Class, PersonalInfo, Stuff, Category, Product, UserProfile, Order, OrderItem, Student, StudentGroup, LibraryCard, LibraryLiterature, BookBorrowingProcess
+from .models import Musician, Album, Person, School, Class, PersonalInfo, Stuff, Category, Product, UserProfile, Order, OrderItem, Student, StudentGroup, LibraryCard, LibraryLiterature, BookBorrowingProcess, AdvUser, Spare, Machine
 
-admin.site.register(Musician)
-admin.site.register(Album)
-admin.site.register(Person)
-admin.site.register(School)
-admin.site.register(Class)
-admin.site.register(PersonalInfo)
-admin.site.register(Stuff)
-admin.site.register(Category)
-admin.site.register(Product)
-admin.site.register(UserProfile)
-admin.site.register(Order)
-admin.site.register(OrderItem)
-admin.site.register(Student)
-admin.site.register(StudentGroup)
-admin.site.register(LibraryCard)
-admin.site.register(LibraryLiterature)
-admin.site.register(BookBorrowingProcess)
+
+@admin.register(Musician, Album, Person, School, Class, PersonalInfo,
+                Stuff, Category, Product, UserProfile, Order, OrderItem, Student,
+                StudentGroup, LibraryCard, LibraryLiterature, BookBorrowingProcess,
+                AdvUser, Spare, Machine)
+
+class MyModelAdmin(admin.ModelAdmin):
+  list_per_page = 20
+  list_select_related = True
