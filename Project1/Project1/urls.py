@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-  path('admin/', admin.site.urls),
-  # path('', include('market.urls')),
+  path('admin', admin.site.urls),
   path('', include('market.urls')),
-  path('about/', include('market.urls')),
-  path('contact/', include('market.urls')),
-  path('about_me/', include('market.urls')),
-  # path('login/', include('market.urls')),
-  path('register_user/', include('market.urls')),
-  path('add_product/', include('market.urls')),
-]
+  path('index', include(('market.urls', 'market'), 'market')),
+  path('example', include('example.urls')),
+  path('about', include('example.urls')),
+  path('data', include('example.urls')),
+
+] + static(settings.STATIC_URL)

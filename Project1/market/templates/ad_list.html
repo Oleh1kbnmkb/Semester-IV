@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administrative lists</title>
+</head>
+<body>
+    <h1>List of main products</h1>
+    <ul>
+    {% for item in featured_products %}
+        <li>{{ item.product.name }}</li>
+    {% endfor %}
+    </ul>
+
+    <h1>List of products in the top</h1>
+    <ul>
+    {% for item in top_products %}
+        <li>{{ item.product.name }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

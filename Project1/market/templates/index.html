@@ -115,159 +115,110 @@
       footer p {
         margin: 0;
       }
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.new-label {
+    color: red;
+    font-weight: bold;
+}
+
+form {
+    margin: 20px 0;
+}
+
+button {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
 </style>
+
+
+<br>
+<br>
+<p>Кількість відвідувань: {{ visits }}</p>
+<h1>Product List</h1>
+<ul>
+    {% for product in products %}
+    <li>
+        <strong>{{ product.name }}</strong>: {{ product.description }} - ${{ product.price }}
+        {% if product.new %}
+        <span class="new-label">New</span>
+        {% endif %}
+        <p>
+            {% for star in "12345" %}
+                {% if forloop.counter <= product.rating %}
+                <span>&#9733;</span>
+                {% else %}
+                <span>&#9734;</span>
+                {% endif %}
+            {% endfor %}
+        </p>
+    </li>
+    {% endfor %}
+</ul>
 
 
 <main>
     <section>
-        <h2>New Arrivals</h2>
+        <h2>Combined New Arrivals and Best Sellers</h2>
         <ul>
+            {% for item in paginated_list %}
             <li>
-                <img src="{% static 'products1.jpg' %}" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $35</p>
+                <img src="{% static item.photo %}">
+                {% if item.arrivals_name %}
+                <h3>{{ item.arrivals_name }}</h3>
+                <p>{{ item.arrivals_desc }}</p>
+                <p>{{ item.arrivals_price }}</p>
+                {% elif item.Sellers_name %}
+                <h3>{{ item.Sellers_name }}</h3>
+                <p>{{ item.Sellers_desc }}</p>
+                <p>{{ item.Sellers_price }}</p>
+                {% endif %}
                 <button>Add to Cart</button>
             </li>
-            <li>
-                <img src="{% static 'products2.jpg' %}" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $20</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products3.jpg' %}" alt="Product 3">
-                <h3>Product 3</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $15</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products4.jpg' %}" alt="Product 4">
-                <h3>Product 4</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $15</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products5.jpg' %}" alt="Product 5">
-                <h3>Product 5</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $65</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products6.jpg' %}" alt="Product 6">
-                <h3>Product 6</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $30</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products7.jpeg' %}" alt="Product 7">
-                <h3>Product 7</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $40</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products8.jpg' %}" alt="Product 8">
-                <h3>Product 8</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $25</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products9.jpg' %}" alt="Product 9">
-                <h3>Product 9</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $35</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'products10.jpg' %}" alt="Product 10">
-                <h3>Product 10</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $45</p>
-                <button>Add to Cart</button>
-            </li>
+            {% endfor %}
         </ul>
-    </section>
-    <section>
-        <h2>Best Sellers</h2>
-        <ul>
-            <li>
-                <img src="{% static 'product1.jpg' %}" alt="Product 4">
-                <h3>Product 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $39</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product2.jpg' %}" alt="Product 4">
-                <h3>Product 2</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $29</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product3.jpg' %}" alt="Product 4">
-                <h3>Product 3</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $55</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product4.jpg' %}" alt="Product 4">
-                <h3>Product 4</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $40</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product5.png' %}" alt="Product 5">
-                <h3>Product 5</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $20</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product6.jpeg' %}" alt="Product 6">
-                <h3>Product 6</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $35</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product7.jpg' %}" alt="Product 7">
-                <h3>Product 7</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $50</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product8.jpg' %}" alt="Product 8">
-                <h3>Product 8</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $45</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product9.jpg' %}" alt="Product 9">
-                <h3>Product 9</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $60</p>
-                <button>Add to Cart</button>
-            </li>
-            <li>
-                <img src="{% static 'product10.jpg' %}" alt="Product 10">
-                <h3>Product 10</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Price: $55</p>
-                <button>Add to Cart</button>
-            </li>
-        </ul>
+        <div>
+            {% if paginated_list.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ paginated_list.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            Page {{ paginated_list.number }} of {{ paginated_list.paginator.num_pages }}
+
+            {% if paginated_list.has_next %}
+            <a href="?page={{ paginated_list.next_page_number }}">Next</a>
+            <a href="?page={{ paginated_list.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
     </section>
 </main>
+
 {% endblock %}

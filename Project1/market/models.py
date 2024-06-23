@@ -1,51 +1,81 @@
 from django.contrib.auth.models import User
-from django.db import models
-import uuid
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
-class AdvUser(models.Model):
-  is_activated = models.BooleanField(default=True)
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Rubric(models.Model):
+  name = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.name
+
+
+class Bb(models.Model):
+  title = models.CharField(max_length=100)
+  content = models.TextField()
+  price = models.DecimalField(max_digits=10, decimal_places=2)
+  rubric = models.ForeignKey(Rubric, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.title
+
+
+class GoITeens(models.Model):
+  title = models.CharField(max_length=100)
+  content = models.TextField(null=True, blank=True)
+  price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+  rubric = models.ForeignKey(Rubric, on_delete=models.CASCADE, null=True, blank=True)
+
+  def title_and_price(self):
+    if self.price:
+      return '%s (%.2f)' % (self.title, self.price)
+    else:
+      return self.title
+
+  def __str__(self):
+    return self.title
 
 
 class Spare(models.Model):
   name = models.CharField(max_length=30)
+
+  def __str__(self):
+    return self.name
 
 
 class Machine(models.Model):
   name = models.CharField(max_length=30)
   spares = models.ManyToManyField(Spare)
 
+  def __str__(self):
+    return self.name
+
+
+class AdvUser(models.Model):
+  is_activated = models.BooleanField(default=True)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.user.username
+
 
 class Musician(models.Model):
-  FIRST_NAME = {
-    "A": "Alexander",
-    "B": "Rimma",
-    "C": "Oleg",
-    "D": "Timofey"
-  }
-
-  first_name = models.CharField(max_length=1, choices=FIRST_NAME)
+  first_name = models.CharField(max_length=50)
   last_name = models.CharField(max_length=50)
   instrument = models.CharField(max_length=100)
 
-  def str(self):
+  def __str__(self):
     return f"{self.first_name} {self.last_name}"
 
 
 class Album(models.Model):
-  NUM_STARS = {
-    "1": "⭐",
-    "2": "⭐⭐",
-    "3": "⭐⭐⭐",
-    "4": "⭐⭐⭐⭐",
-    "5": "⭐⭐⭐⭐⭐"
-  }
   artist = models.ForeignKey(Musician, on_delete=models.CASCADE)
   name = models.CharField(max_length=100)
   release_date = models.DateField()
-  num_stars = models.IntegerField(choices=NUM_STARS)
+  num_stars = models.IntegerField()
+
+  def __str__(self):
+    return self.name
 
 
 class Person(models.Model):
@@ -71,14 +101,15 @@ class Class(models.Model):
 
 
 class PersonalInfo(models.Model):
-  FIRST_NAME = {
-    "A": "Alexander",
-    "B": "Rimma",
-    "C": "Oleg",
-    "D": "Timofey"
-  }
+  FIRST_NAME_CHOICES = [
+    ("A", "Alexander"),
+    ("B", "Rimma"),
+    ("C", "Oleg"),
+    ("D", "Timofey"),
+    ("E", "Kostya"),
+  ]
 
-  first_name = models.CharField(max_length=1, choices=FIRST_NAME)
+  first_name = models.CharField(max_length=1, choices=FIRST_NAME_CHOICES)
   last_name = models.CharField(max_length=255)
   school = models.ForeignKey(School, on_delete=models.CASCADE)
   address = models.CharField(max_length=255)
@@ -89,13 +120,17 @@ class Stuff(models.Model):
   stuff_name = models.CharField(max_length=30)
   stuff_desc = models.CharField(max_length=257)
   photo = models.CharField(max_length=100)
-  price = models.IntegerField()
+  price = models.FloatField()
+  rate = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+
+  def publish(self):
+    self.save()
 
 
 class Basket(models.Model):
-  Basket_id = models.IntegerField()
-  stuff_id = models.IntegerField()
-  person_id = models.IntegerField()
+  basket_id = models.IntegerField()
+  stuff = models.ForeignKey(Stuff, on_delete=models.CASCADE)
+  person = models.ForeignKey(Person, on_delete=models.CASCADE)
   date = models.DateField()
 
 
@@ -108,10 +143,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-  name = models.CharField(max_length=200)
+  name = models.CharField(max_length=100)
   description = models.TextField()
   price = models.DecimalField(max_digits=10, decimal_places=2)
-  category = models.ForeignKey(Category, on_delete=models.CASCADE)
+  new = models.BooleanField(default=False)
+  rating = models.DecimalField(max_digits=3, decimal_places=2, default=0)
 
   def __str__(self):
     return self.name
@@ -138,47 +174,59 @@ class OrderItem(models.Model):
     return f"{self.quantity} - {self.product.name}"
 
 
-class Student(models.Model):
-  name = models.CharField(max_length=100)
-  surname = models.CharField(max_length=100)
-  student_card_number = models.CharField(max_length=20)
-  email = models.EmailField()
+# Нові моделі
+class Author(models.Model):
+  first_name = models.CharField(max_length=50)
+  last_name = models.CharField(max_length=50)
 
   def __str__(self):
-    return f"{self.name} {self.surname}"
+    return f"{self.first_name} {self.last_name}"
 
 
-class StudentGroup(models.Model):
-  group_number = models.CharField(max_length=10)
-  password = models.CharField(max_length=50)
-  meeting_room = models.CharField(max_length=50)
-
-  def __str__(self):
-    return self.group_number
+class AuthorProfile(models.Model):
+  author = models.OneToOneField(Author, on_delete=models.CASCADE)
+  biography = models.TextField()
 
 
-class LibraryCard(models.Model):
-  student = models.OneToOneField(Student, on_delete=models.CASCADE)
-  issue_date = models.DateField()
-  expiration_date = models.DateField()
-  price = models.DecimalField(max_digits=10, decimal_places=2)
-
-  def __str__(self):
-    return f"Library Card for {self.student}"
-
-
-class LibraryLiterature(models.Model):
-  title = models.CharField(max_length=200)
-  genre = models.CharField(max_length=100)
-  publication_date = models.DateField()
-  year = models.PositiveIntegerField()
+class Book(models.Model):
+  title = models.CharField(max_length=100)
+  author = models.ForeignKey(Author, on_delete=models.CASCADE)
+  published_date = models.DateField()
 
   def __str__(self):
     return self.title
 
 
-class BookBorrowingProcess(models.Model):
-  library_card = models.ForeignKey(LibraryCard, on_delete=models.CASCADE)
-  literature = models.ForeignKey(LibraryLiterature, on_delete=models.CASCADE)
-  borrowing_date = models.DateField()
-  giver_name = models.CharField(max_length=200)
+class Library(models.Model):
+  name = models.CharField(max_length=100)
+  books = models.ManyToManyField(Book)
+
+  def __str__(self):
+    return self.name
+
+
+class NewArrivals(models.Model):
+  arrivals_name = models.CharField(max_length=255)
+  arrivals_desc = models.CharField(max_length=350)
+  arrivals_price = models.CharField(max_length=255)
+  photo = models.CharField(max_length=100)
+
+
+class BestSellers(models.Model):
+  Sellers_name = models.CharField(max_length=255)
+  Sellers_desc = models.CharField(max_length=350)
+  Sellers_price = models.CharField(max_length=255)
+  photo = models.CharField(max_length=100)
+
+
+
+class FeaturedProduct(models.Model):
+  product = models.ForeignKey('Product', on_delete=models.CASCADE)
+  def __str__(self):
+    return self.product.name
+
+
+class TopProduct(models.Model):
+  product = models.ForeignKey('Product', on_delete=models.CASCADE)
+  def __str__(self):
+    return self.product.name
