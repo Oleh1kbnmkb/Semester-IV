@@ -78,18 +78,6 @@ class Album(models.Model):
     return self.name
 
 
-class Person(models.Model):
-  name = models.CharField(max_length=30)
-  surname = models.CharField(max_length=30, default='Doe')
-  mail = models.EmailField(max_length=100)
-  birthday = models.DateField()
-  password = models.CharField(max_length=257, default='default_password')
-  phone = models.CharField(max_length=12, default='000-000-0000')
-
-  def __str__(self):
-    return f"{self.name} {self.surname}"
-
-
 class School(models.Model):
   school_address = models.CharField(max_length=255)
   school_number = models.CharField(max_length=255)
@@ -117,6 +105,7 @@ class PersonalInfo(models.Model):
 
 
 class Stuff(models.Model):
+  stuff_id = models.IntegerField()
   stuff_name = models.CharField(max_length=30)
   stuff_desc = models.CharField(max_length=257)
   photo = models.CharField(max_length=100)
@@ -126,12 +115,6 @@ class Stuff(models.Model):
   def publish(self):
     self.save()
 
-
-class Basket(models.Model):
-  basket_id = models.IntegerField()
-  stuff = models.ForeignKey(Stuff, on_delete=models.CASCADE)
-  person = models.ForeignKey(Person, on_delete=models.CASCADE)
-  date = models.DateField()
 
 
 class Category(models.Model):
@@ -143,6 +126,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+  person_id = models.IntegerField()
   name = models.CharField(max_length=100)
   description = models.TextField()
   price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -204,6 +188,17 @@ class Library(models.Model):
   def __str__(self):
     return self.name
 
+class Person(models.Model):
+  name = models.CharField(max_length=30)
+  surname = models.CharField(max_length=30, default='Doe')
+  mail = models.EmailField(max_length=100)
+  birthday = models.DateField()
+  password = models.CharField(max_length=257, default='default_password')
+  phone = models.CharField(max_length=12, default='000-000-0000')
+
+  def __str__(self):
+    return f"{self.name} {self.surname}"
+
 
 class NewArrivals(models.Model):
   arrivals_name = models.CharField(max_length=255)
@@ -211,13 +206,18 @@ class NewArrivals(models.Model):
   arrivals_price = models.CharField(max_length=255)
   photo = models.CharField(max_length=100)
 
+  def __str__(self):
+    return self.arrivals_name
 
-class BestSellers(models.Model):
-  Sellers_name = models.CharField(max_length=255)
-  Sellers_desc = models.CharField(max_length=350)
-  Sellers_price = models.CharField(max_length=255)
-  photo = models.CharField(max_length=100)
 
+class Basket(models.Model):
+  person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, blank=True)
+  session_key = models.CharField(max_length=40, null=True, blank=True)
+  product = models.ForeignKey(NewArrivals, on_delete=models.CASCADE)
+  count = models.PositiveIntegerField(default=1)
+
+  def __str__(self):
+    return f"{self.product.arrivals_name} - {self.count}"
 
 
 class FeaturedProduct(models.Model):

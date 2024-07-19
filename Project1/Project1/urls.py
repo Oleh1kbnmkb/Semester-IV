@@ -22,9 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
   path('admin', admin.site.urls),
   path('', include('market.urls')),
-  path('index', include(('market.urls', 'market'), 'market')),
   path('example', include('example.urls')),
-  path('about', include('example.urls')),
-  path('data', include('example.urls')),
 
 ] + static(settings.STATIC_URL)

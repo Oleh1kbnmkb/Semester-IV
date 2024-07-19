@@ -125,9 +125,22 @@ APPEND_SLASH = False
 STATIC_URL = '/static/style.css/'
 
 STATICFILES_DIRS = [
-    ("css", "market/static"),  # ("prefix", "path")
+    ("css", "market/static"),
 ]
 
 STATIC_ROOT = []
+
+
+LOGIN_REDIRECT_URL = 'index'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_COOKIE_SECURE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
 
 

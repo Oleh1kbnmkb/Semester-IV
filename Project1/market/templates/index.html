@@ -6,219 +6,195 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-      }
+    }
 
-      /* Set the background color of the body element */
-      body {
+    /* Set the background color of the body element */
+    body {
         background-color: #f2f2f2;
         font-family: Arial, sans-serif;
         font-size: 16px;
         line-height: 1.5;
-      }
+    }
 
-      /* Style the header section */
-      header {
+    /* Style the header section */
+    header {
         background-color: #333;
         color: #fff;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-      }
+    }
 
-      header h1 {
+    header h1 {
         margin: 0;
         font-size: 28px;
-      }
+        color: white
+    }
 
-      nav ul {
+    nav ul {
         list-style: none;
         display: flex;
-      }
+    }
 
-      nav li {
+    nav li {
         color: #000;
         margin-right: 20px;
-      }
+    }
 
-      nav a {
+    nav a {
         color: #000;
         text-decoration: none;
-      }
+    }
 
-      /* Style the main section */
-      main {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      section {
-        flex-basis: calc(50% - 20px);
-        margin-bottom: 40px;
-      }
-
-      section h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      li {
-        background-color: #fff;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      li img {
-        max-width: 100%;
-        margin-bottom: 10px;
-      }
-
-      li h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-
-      li p {
-        font-size: 14px;
-        margin-bottom: 20px;
-      }
-
-      button {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #666;
-      }
-      /* Style the footer section */
-      footer {
+    /* Style the footer section */
+    footer {
         background-color: #333;
         color: #fff;
         text-align: center;
         padding: 10px;
-      }
+    }
 
-      footer p {
+    footer p {
         margin: 0;
-      }
+    }
 
     body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
 
-h1 {
-    color: #333;
-}
+    h1 {
+        color: #333;
+    }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
 
-li {
-    background: #f9f9f9;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-}
+    li {
+        background: #f9f9f9;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
 
-.new-label {
-    color: red;
-    font-weight: bold;
-}
+    button {
+        background: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
 
-form {
-    margin: 20px 0;
-}
+    button:hover {
+        background: #555;
+    }
 
-button {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #555;
-}
 </style>
 
 
 <br>
 <br>
-<p>Кількість відвідувань: {{ visits }}</p>
-<h1>Product List</h1>
-<ul>
+<h1 style="color: #333; margin-bottom: 20px; font-family: Arial, sans-serif;">Product List</h1>
+<ul style="list-style-type: none; padding: 0; font-family: Arial, sans-serif;">
     {% for product in products %}
-    <li>
+    <li style="background: #f9f9f9; margin: 10px 0; padding: 10px; border: 1px solid #ddd;">
         <strong>{{ product.name }}</strong>: {{ product.description }} - ${{ product.price }}
         {% if product.new %}
-        <span class="new-label">New</span>
+        <span style="color: red; font-weight: bold;">New</span>
         {% endif %}
-        <p>
+        <p style="margin: 10px 0 0;">
             {% for star in "12345" %}
-                {% if forloop.counter <= product.rating %}
-                <span>&#9733;</span>
-                {% else %}
-                <span>&#9734;</span>
-                {% endif %}
+            {% if forloop.counter <= product.rating %}
+            <span style="color: gold;">&#9733;</span>
+            {% else %}
+            <span style="color: #ccc;">&#9734;</span>
+            {% endif %}
             {% endfor %}
         </p>
     </li>
     {% endfor %}
 </ul>
 
+<br>
+<br>
+<br>
 
-<main>
+
+<main class="container-fluid my-5">
     <section>
-        <h2>Combined New Arrivals and Best Sellers</h2>
-        <ul>
+        <h2 class="mb-4 text-center">New Arrivals</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for item in paginated_list %}
-            <li>
-                <img src="{% static item.photo %}">
-                {% if item.arrivals_name %}
-                <h3>{{ item.arrivals_name }}</h3>
-                <p>{{ item.arrivals_desc }}</p>
-                <p>{{ item.arrivals_price }}</p>
-                {% elif item.Sellers_name %}
-                <h3>{{ item.Sellers_name }}</h3>
-                <p>{{ item.Sellers_desc }}</p>
-                <p>{{ item.Sellers_price }}</p>
-                {% endif %}
-                <button>Add to Cart</button>
-            </li>
+            <div class="col">
+                <div class="card h-100 position-relative" style="min-height: 350px;">
+                    <img src="{% static item.photo %}" class="card-img-top" alt="{{ item.arrivals_name }}"
+                         style="width: 100%; height: 350px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column"
+                         style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="margin-bottom: auto;">
+                            <h5 class="card-title">{{ item.arrivals_name }}</h5>
+                            <p class="card-text">{{ item.arrivals_desc }}</p>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-between align-items-center"
+                             style="position: absolute; bottom: 10px; left: 10px; right: 10px;">
+                            <form action="{% url 'add_to_basket' item.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-dark">Add to Cart</button>
+                            </form>
+                            <span class="card-text"><strong>{{ item.arrivals_price }}</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
-        <div>
-            {% if paginated_list.has_previous %}
-            <a href="?page=1">&laquo; First</a>
-            <a href="?page={{ paginated_list.previous_page_number }}">Previous</a>
-            {% endif %}
+        </div>
+        <div class="mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if paginated_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" style="color: #007bff;">&laquo; First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_list.previous_page_number }}"
+                           style="color: #007bff;">Previous</a>
+                    </li>
+                    {% endif %}
 
-            Page {{ paginated_list.number }} of {{ paginated_list.paginator.num_pages }}
+                    <li class="page-item disabled">
+                        <a class="page-link" style="color: #6c757d;">Page {{ paginated_list.number }} of 7</a>
+                    </li>
 
-            {% if paginated_list.has_next %}
-            <a href="?page={{ paginated_list.next_page_number }}">Next</a>
-            <a href="?page={{ paginated_list.paginator.num_pages }}">Last &raquo;</a>
-            {% endif %}
+                    {% if paginated_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_list.next_page_number }}" style="color: #007bff;">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_list.paginator.num_pages }}"
+                           style="color: #007bff;">Last &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
     </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 {% endblock %}
+
+
+<div class="d-flex justify-content-between align-items-center"
+     style="position: absolute; bottom: 10px; left: 10px; right: 10px;">
+    <form action="{% url 'add_to_basket' item.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark">Add to Cart</button>
+    </form>
+    <span class="card-text"><strong>{{ item.arrivals_price }}</strong></span>
+</div>

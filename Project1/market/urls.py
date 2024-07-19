@@ -13,7 +13,13 @@ urlpatterns = [
     path('shop', views.shop, name='shop'),
     path('add_product', views.add_product, name='add_product'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('ad_lists', views.ad_lists, name='ad_lists')
+    path('settings', views.settings, name='settings'),
+    path('edit', views.edit, name='edit'),
+    path('delete', views.delete, name='delete'),
+    path('update_prod/<arrivals_id>', views.update_prod, name='update_prod'),
+    path('delete_prod/<arrivals_id>', views.delete_prod, name='delete_prod'),
+    path('add_to_basket/<product_id>', views.add_to_basket, name='add_to_basket'),
+    path('view_basket', views.view_basket, name='view_basket'),
 ]
 
 

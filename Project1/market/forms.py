@@ -4,21 +4,22 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 from django.forms.widgets import Select
-
+from .models import NewArrivals
 from .models import Product, GoITeens
 
+
 class ProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ['name', 'description', 'price', 'new', 'rating']
+  class Meta:
+    model = Product
+    fields = ['name', 'description', 'price', 'new', 'rating']
 
 
 GoITeenForm = modelform_factory(GoITeens,
-  fields=('title', 'content', 'price', 'rubric'),
-  labels={'title': 'Name good'},
-  help_texts={'rubric': 'Create it!'},
-  field_classes={'price': DecimalField},
-  widgets={'rubric': Select(attrs={'size': 8})})
+                                fields=('title', 'content', 'price', 'rubric'),
+                                labels={'title': 'Name good'},
+                                help_texts={'rubric': 'Create it!'},
+                                field_classes={'price': DecimalField},
+                                widgets={'rubric': Select(attrs={'size': 8})})
 
 
 class RegisterUserForm(UserCreationForm):
@@ -43,9 +44,26 @@ class RegisterUserForm(UserCreationForm):
     fields = ('username', 'email', 'password1', 'password2')
 
 
-
-
-
 class LoginForm(AuthenticationForm):
   username = forms.CharField(widget=TextInput(attrs={'class': 'form-control'}))
   password = forms.CharField(widget=PasswordInput(attrs={'class': 'form-control'}))
+
+
+
+class NewArrivalsForm(forms.ModelForm):
+  class Meta:
+    model = NewArrivals
+    fields = ('arrivals_name', 'arrivals_desc', 'arrivals_price', 'photo')
+    labels = {
+      'arrivals_name': '',
+      'arrivals_desc': '',
+      'arrivals_price': '',
+      'photo': '',
+    }
+    widgets = {
+      'arrivals_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'arrivals_desc': forms.TextInput(attrs={'class': 'form-control'}),
+      'arrivals_price': forms.TextInput(attrs={'class': 'form-control'}),
+      'photo': forms.TextInput(attrs={'class': 'form-control'})
+    }
+

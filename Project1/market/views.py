@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
-from .models import Product, Stuff, NewArrivals, BestSellers, FeaturedProduct, TopProduct
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Product, Stuff, NewArrivals, FeaturedProduct, TopProduct, Basket
 from .forms import ProductForm
-from itertools import chain
 from django.core.paginator import Paginator
-from .forms import RegisterUserForm, LoginForm
-from django.contrib.auth.models import auth
+from .forms import RegisterUserForm, NewArrivalsForm
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+
 
 
 def about_me(request):
@@ -41,55 +41,46 @@ def sign_up(request):
 
 
 def my_login(request):
-  form = LoginForm()
   if request.method == 'POST':
-    form = LoginForm(request, data=request.POST)
-    if form.is_valid():
-      username = request.POST.get('username')
-      password = request.POST.get('password')
-      user = authenticate(request, username=username, password=password)
-      if user is not None:
-        auth.login(request, user)
-        return redirect("index")
-  context = {'loginform': form}
-  return render(request, "registration/login.html", context=context)
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+      login(request, user)
+      messages.success(request, f'Welcome {user.username}!')
+      return redirect('index')
+    else:
+      messages.error(request, 'Invalid username or password.')
+
+  return render(request, "registration/login.html")
 
 
 def index(request):
+  user = request.user
   products = Product.objects.all()
   stuff = Stuff.objects.all()
   featured_products = FeaturedProduct.objects.all()
   top_products = TopProduct.objects.all()
   newarrivals = list(NewArrivals.objects.all())
-  bestsellers = list(BestSellers.objects.all())
-  combined_list = list(chain(newarrivals, bestsellers))
-
-  paginator = Paginator(combined_list, 2)
+  paginator = Paginator(newarrivals, 3)
   page = request.GET.get('page')
   paginated_list = paginator.get_page(page)
-
-  visits = int(request.COOKIES.get('visits', '0'))
-  visits += 1
 
   response = render(request, 'index.html', {
     'products': products,
     'stuff': stuff,
     'newarrivals': newarrivals,
     'paginated_list': paginated_list,
-    'bestsellers': bestsellers,
     'featured_products': featured_products,
     'top_products': top_products,
-    'visits': visits
+    'user': user,
   })
-  response.set_cookie('visits', visits)
+  request.session.flush()
   return response
 
 
-@login_required
 def add_product(request):
-  if not request.user.is_superuser:
-    return redirect('index')
-
   if request.method == 'POST':
     form = ProductForm(request.POST)
     if form.is_valid():
@@ -101,9 +92,74 @@ def add_product(request):
   return render(request, 'admin.html', {'form': form})
 
 
-def ad_lists(request):
-  if not request.user.is_superuser:
+def settings(request):
+    return render(request, 'settings.html')
+
+
+def edit(request):
+  newarrivals = NewArrivals.objects.all()
+  response = render(request, 'products_edit.html', {
+    'newarrivals': newarrivals,
+  })
+
+  return response
+
+
+def delete(request):
+  newarrivals = NewArrivals.objects.all()
+  response = render(request, 'products_delete.html', {
+    'newarrivals': newarrivals,
+  })
+
+  return response
+
+
+def update_prod(request, arrivals_id):
+  arrivals = NewArrivals.objects.get(pk=arrivals_id)
+  form = NewArrivalsForm(request.POST or None, instance=arrivals)
+  if form.is_valid():
+    form.save()
+    return redirect('edit')
+  return render(request, 'update_products.html',
+                {
+                  'arrivals': arrivals,
+                  'form': form,
+                })
+
+
+
+def delete_prod(request, arrivals_id):
+  arrivals = NewArrivals.objects.get(pk=arrivals_id)
+  arrivals.delete()
+  return redirect('delete')
+
+
+def add_to_basket(request, product_id):
+  if request.method == "POST":
+    if 'basket' not in request.session:
+      request.session['basket'] = {}
+    basket = request.session['basket']
+    if str(product_id) in basket:
+      basket[str(product_id)] += 1
+    else:
+      basket[str(product_id)] = 1
+    request.session.modified = True
+    product = get_object_or_404(NewArrivals, id=product_id)
+    session_key = request.session.session_key
+    if not session_key:
+      request.session.create()
+      session_key = request.session.session_key
+    basket_item, created = Basket.objects.get_or_create(session_key=session_key, product=product)
+    if not created:
+      basket_item.count += 1
+    else:
+      basket_item.count = 1
+    basket_item.save()
+    return redirect('view_basket')
+  else:
     return redirect('index')
-  featured_products = FeaturedProduct.objects.all()
-  top_products = TopProduct.objects.all()
-  return render(request, 'ad_list.html', {'featured_products': featured_products, 'top_products': top_products})
+
+
+def view_basket(request):
+  basket_items = Basket.objects.all()
+  return render(request, 'basket.html', {'basket_items': basket_items})
