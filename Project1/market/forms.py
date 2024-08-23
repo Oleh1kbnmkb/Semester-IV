@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 from django.forms.widgets import Select
-from .models import NewArrivals
-from .models import Product, GoITeens
+from .models import Product, GoITeens, NewArrivals, Comment
+
 
 
 class ProductForm(forms.ModelForm):
@@ -67,3 +67,9 @@ class NewArrivalsForm(forms.ModelForm):
       'photo': forms.TextInput(attrs={'class': 'form-control'})
     }
 
+
+class CommentForm(forms.ModelForm):
+
+  class Meta:
+    model = Comment
+    fields = ['author', 'text']

@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Stuff, NewArrivals, FeaturedProduct, TopProduct, Basket
+from .models import Product, Stuff, NewArrivals, FeaturedProduct, TopProduct, Basket, GoITeens
 from .forms import ProductForm
 from django.core.paginator import Paginator
-from .forms import RegisterUserForm, NewArrivalsForm
+from .forms import RegisterUserForm, NewArrivalsForm, CommentForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.contrib import messages
-
-
+from .serializers import GoITeensSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 
 def about_me(request):
@@ -93,7 +96,7 @@ def add_product(request):
 
 
 def settings(request):
-    return render(request, 'settings.html')
+  return render(request, 'settings.html')
 
 
 def edit(request):
@@ -125,7 +128,6 @@ def update_prod(request, arrivals_id):
                   'arrivals': arrivals,
                   'form': form,
                 })
-
 
 
 def delete_prod(request, arrivals_id):
@@ -163,3 +165,52 @@ def add_to_basket(request, product_id):
 def view_basket(request):
   basket_items = Basket.objects.all()
   return render(request, 'basket.html', {'basket_items': basket_items})
+
+
+def update_quantity(request, item_id):
+  item = get_object_or_404(Basket, id=item_id)
+  if request.method == "POST":
+    action = request.POST.get('action')
+    if action == 'increase':
+      item.count += 1
+    elif action == 'decrease' and item.count > 1:
+      item.count -= 1
+    item.save()
+  return redirect('view_basket')
+
+
+def product_detail(request, product_id):
+  product = NewArrivals.objects.get(id=product_id)
+  comments = product.comments.all()
+
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.product = product
+      comment.save()
+      return redirect('product_detail', product_id=product.id)
+  else:
+    form = CommentForm()
+
+  context = {
+    'product': product,
+    'comments': comments,
+    'form': form,
+  }
+  return render(request, 'product_detail.html', context)
+
+
+def registration_view(request):
+  if request.method == 'POST':
+    username = request.POST['username']
+    password = request.POST['password']
+
+    # Create a new user
+    user = User.objects.create_user(username=username, password=password)
+    if user:
+      return JsonResponse({'status': 'success'})
+    else:
+      return JsonResponse({'status': 'error'})
+  else:
+    return render(request, 'registration.html')

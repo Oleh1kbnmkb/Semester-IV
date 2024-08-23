@@ -1,0 +1,170 @@
+{% extends "bases.html" %}
+{% block content %}
+
+
+<style>
+.c-main-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 1rem 4rem;
+    position: relative;
+}
+
+
+.c-main-grid__lead-container {
+    width: 70%;
+    margin-right: 3rem;
+    margin-left: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Space between images */
+}
+
+
+/* Lead image section */
+.c-main-grid__lead {
+    width: 70%;
+    margin-right: 3rem;
+    margin-left: 2rem;
+    position: relative;
+}
+
+
+.c-card__picture {
+    margin: 0;
+}
+
+
+
+
+.c-card__picture img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+
+.c-main-grid__feed {
+    width: 35%;
+    margin-right: 3rem;
+}
+
+.c-feed {
+    position: relative;
+    background-color: #656565;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.c-feed__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #555;
+}
+
+
+.c-feed:before {
+    content: "";
+    display: block;
+    height: 5px;
+    background-color: #ff6600;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 8px 8px 0 0;
+}
+
+.c-feed__item {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #555;
+}
+
+.c-card__caption h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.c-card__date {
+    font-size: 0.8rem;
+    color: #bbb;
+}
+
+.c-feed__footer {
+    margin-top: 1rem;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.c-feed__button {
+    display: block;
+    padding: 1rem 0;
+    color: white;
+    text-decoration: none; /* Забезпечує відсутність підкреслення */
+    font-weight: bold;
+    cursor: default; /* Прибирає курсор руки */
+}
+
+.c-feed__button:hover {
+    color: white; /* Залишається білим при наведенні */
+    background-color: #ff6600; /* Залишається того ж кольору при наведенні */
+    text-decoration: none; /* Залишається без підкреслення */
+    cursor: default; /* Прибирає курсор руки при наведенні */
+}
+
+
+
+</style>
+<br>
+<div class="c-main-grid">
+    <div class="c-main-grid__lead-container">
+        <picture class="c-card__picture">
+            <img src="static/economic.png" alt="Economic Image">
+        </picture>
+
+        <picture class="c-card__picture">
+            <img src="static/pictures.png" alt="Second Economic Image">
+        </picture>
+    </div>
+
+
+    <div class="c-main-grid__feed">
+        <aside class="c-feed c-main-grid__feed-body">
+            <p class="c-feed__title">Останні новини</p>
+            <ul class="c-feed__list">
+                {% for item in news_list %}
+                <li class="c-feed__item">
+                    <article class="c-card c-card--plain c-feed__card">
+                        <div class="c-card__caption">
+                            <h3>{{ item[0] }}</h3>
+                            <time class="c-card__date">{{ item[1] }}</time>
+                        </div>
+                    </article>
+                </li>
+                {% endfor %}
+            </ul>
+            <button class="c-feed__footer">
+                <a href="{{ url_for('news') }}" class="c-button c-feed__button">Всі новини</a>
+            </button>
+        </aside>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock content %}

@@ -1,0 +1,74 @@
+{
+    "students": [
+        {
+            "first_name": "Ivan",
+            "last_name": "Petrov",
+            "school": {
+                "name": "School 1",
+                "address": "123 Main St, Kyiv"
+            },
+            "address": "456 Elm St, Kyiv",
+            "class": {
+                "school_number": 1,
+                "classroom": "5A",
+                "additional_info": "Near the library"
+            }
+        },
+        {
+            "first_name": "Olena",
+            "last_name": "Shevchenko",
+            "school": {
+                "name": "School 2",
+                "address": "789 Maple Ave, Lviv"
+            },
+            "address": "101 Pine St, Lviv",
+            "class": {
+                "school_number": 2,
+                "classroom": "7B",
+                "additional_info": "Next to the science lab"
+            }
+        },
+        {
+            "first_name": "Andriy",
+            "last_name": "Kovalenko",
+            "school": {
+                "name": "School 3",
+                "address": "102 Oak St, Odesa"
+            },
+            "address": "203 Birch St, Odesa",
+            "class": {
+                "school_number": 3,
+                "classroom": "9C",
+                "additional_info": "Third floor, Room 305"
+            }
+        },
+        {
+            "first_name": "Mariya",
+            "last_name": "Tkachenko",
+            "school": {
+                "name": "School 4",
+                "address": "304 Walnut St, Kharkiv"
+            },
+            "address": "405 Cedar St, Kharkiv",
+            "class": {
+                "school_number": 4,
+                "classroom": "6A",
+                "additional_info": "Near the gym"
+            }
+        },
+        {
+            "first_name": "Sergiy",
+            "last_name": "Bondarenko",
+            "school": {
+                "name": "School 5",
+                "address": "506 Poplar St, Dnipro"
+            },
+            "address": "607 Spruce St, Dnipro",
+            "class": {
+                "school_number": 5,
+                "classroom": "8B",
+                "additional_info": "Adjacent to the art room"
+            }
+        }
+    ]
+}

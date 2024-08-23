@@ -6,7 +6,7 @@ from .models import (Musician, Album, Person,
                      Order, OrderItem, Bb, Spare, Machine,
                      Author, AuthorProfile, Book, Library,
                      NewArrivals, FeaturedProduct,
-                     TopProduct, Basket)
+                     TopProduct, Basket, Comment)
 
 
 @admin.register(Musician, Album, Person,
@@ -16,7 +16,10 @@ from .models import (Musician, Album, Person,
                 Order, OrderItem, Bb, Spare, Machine,
                 Author, AuthorProfile, Book, Library,
                 NewArrivals, FeaturedProduct,
-                TopProduct, Basket)
+                TopProduct, Basket, Comment)
 class MyModelAdmin(admin.ModelAdmin):
-    list_per_page = 20
-    list_select_related = True
+  list_per_page = 20
+  list_select_related = True
+
+
+

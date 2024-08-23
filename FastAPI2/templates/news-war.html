@@ -1,0 +1,308 @@
+{% extends "bases.html" %}
+{% block content %}
+
+
+<style>
+/* Контейнер для пагінації */
+.pagination-container {
+    display: flex;
+    justify-content: flex-start; /* Вирівнювання вліво */
+    align-items: center;
+    margin: 20px 0; /* Відступи зверху та знизу */
+    padding-left: 20px; /* Додатковий відступ зліва для вирівнювання */
+}
+
+/* Кнопки пагінації */
+.pagination-button {
+    text-decoration: none; /* Видалити підкреслення */
+    color: #ffffff; /* Білий колір тексту */
+    background-color: #ff6600; /* Оранжевий фон */
+    border: none;
+    padding: 10px 20px; /* Відступи всередині кнопки */
+    margin: 0 10px; /* Відступи між кнопками */
+    border-radius: 5px; /* Закруглені кути */
+    font-size: 16px; /* Розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    display: inline-block; /* Переконайтесь, що кнопки розташовані в ряд */
+    text-align: center; /* Вирівнювання тексту по центру */
+    cursor: pointer; /* Курсор у вигляді руки */
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s; /* Анімація для фону, тіні і кольору тексту */
+}
+
+/* При наведенні на кнопку */
+.pagination-button:hover {
+    background-color: #cc5200; /* Темніший оранжевий колір фону */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тінь */
+    color: #ffffff; /* Білий колір тексту при наведенні */
+    outline: none; /* Видалити обведення при фокусуванні */
+    text-decoration: none; /* Переконайтесь, що немає підкреслення */
+}
+
+/* При фокусуванні на кнопці */
+.pagination-button:focus {
+    outline: none; /* Видалити обведення при фокусуванні */
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.3); /* Легка тінь для фокусу */
+    color: #ffffff; /* Білий колір тексту при фокусуванні */
+}
+
+/* Інформація про сторінку */
+.pagination-info {
+    font-size: 18px; /* Збільшений розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    color: var(--secondary-color); /* Темно-сірий колір тексту */
+    margin: 0 10px; /* Відступи між текстом і кнопками */
+}
+
+
+
+
+    /* Загальний стиль для контейнера новин та категорій */
+    .content-wrapper {
+        display: flex; /* Використання flex для розташування блоків поряд */
+        align-items: flex-start; /* Вирівнювання блоків по верхньому краю */
+        margin-top: 2rem; /* Відступ зверху для підняття блоків */
+        gap: 2rem; /* Відступ між блоком категорій та новинами */
+    }
+
+    /* Стиль для секції новин */
+    .news-section {
+        flex-grow: 1; /* Блок новин займає залишковий простір */
+        max-width: 75%; /* Максимальна ширина блоку новин */
+    }
+
+    .news-section h1 {
+        color: var(--secondary-color);;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: left; /* Вирівнювання заголовка по лівому краю */
+        position: relative;
+    }
+
+    /* Оранжева лінія перед заголовком */
+    .news-section h1::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 100%;
+        background-color: #ff6600; /* Оранжевий колір лінії */
+        position: absolute;
+        left: -1rem; /* Відступ зліва */
+        top: 0;
+    }
+
+    .news-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .news-item {
+        display: flex;
+        padding: 1rem 0;
+        position: relative; /* Додати позиціювання для псевдоелемента */
+        align-items: flex-start; /* Вирівнювання контенту по верхньому краю */
+    }
+
+
+    .news-item::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0; /* Початок лінії зліва */
+        bottom: 0; /* Лінія розташована внизу елемента */
+        width: 90%; /* Ширина лінії зменшена на 10% від ширини контейнера */
+        height: 2px; /* Товщина лінії */
+        background-color: #000; /* Колір лінії */
+    }
+
+    .news-item:last-child {
+        border-bottom: none; /* Без лінії в кінці списку */
+    }
+
+    .news-item picture {
+        flex-shrink: 0;
+        width: 100px; /* Ширина для фото */
+        height: 100px;
+        margin-right: 1rem;
+    }
+
+    .news-item picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px; /* Заокруглення кути фото */
+    }
+
+    .news-content {
+        display: flex;
+        flex-direction: column; /* Вертикальне розміщення тексту та дати */
+        flex-grow: 1;
+    }
+
+    .news-content h3 {
+        margin: 0;
+        color: var(--secondary-color);;
+        font-size: 1.2rem;
+    }
+
+    .news-content a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    .news-content a:hover {
+        color: #0056b3;
+    }
+
+    .news-item .news-time {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 0.5rem; /* Відступ зверху для дати */
+        align-self: flex-start; /* Вирівнювання дати по лівому краю */
+        margin-left: 0.5rem; /* Відступ зліва для дати */
+    }
+
+
+
+       /* Основний стиль для блоку категорій */
+       .category-block {
+           background-color: #656565; /* Темно-сірий фон */
+           color: #fff; /* Білий текст */
+           width: 15%; /* Менша ширина блоку */
+           border-radius: 0.5rem; /* Заокруглені краї */
+           margin-right: 1rem; /* Відступ справа для розміщення блоку зліва */
+           margin-left: 5rem; /* Відступ зліва */
+           padding: 1rem; /* Внутрішні відступи */
+           position: relative; /* Позиціювання для використання псевдоелемента */
+       }
+
+       /* Оранжева лінія зверху */
+       .category-block::before {
+           content: '';
+           display: block;
+           height: 4px; /* Товщина лінії */
+           background-color: #ff6600; /* Оранжевий колір */
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           border-radius: 0.5rem 0.5rem 0 0; /* Заокруглені краї зверху */
+       }
+
+       /* Заголовок блоку */
+       .category-block h2 {
+           margin: 0 0 1rem 0; /* Відступи навколо заголовка */
+           font-size: 1.5rem; /* Розмір шрифту */
+           font-weight: bold; /* Жирний текст */
+       }
+
+       /* Стилі для списку новин */
+       .category-block ul {
+           list-style: none; /* Видалення маркерів списку */
+           padding: 0; /* Відсутність внутрішніх відступів */
+           margin: 0; /* Відсутність зовнішніх відступів */
+       }
+
+       .category-block .main-menu__item {
+           border-bottom: 1px solid #000; /* Тонка лінія роздільника */
+           padding: 0.5rem 0; /* Відступи для елементів списку */
+       }
+
+       .category-block .main-menu__item:last-child {
+           border-bottom: none; /* Вимкнення лінії для останнього елемента */
+       }
+
+       .category-block .main-menu__item a {
+           color: #fff; /* Білий текст */
+           text-decoration: none; /* Видалення підкреслення */
+           display: block; /* Блоковий відображення для зайняття всієї ширини */
+           padding: 0.5rem; /* Внутрішні відступи */
+           transition: background-color 0.3s ease; /* Плавна зміна фону при наведенні */
+       }
+
+       .category-block .main-menu__item a:hover {
+           background-color: #444; /* Темніший фон при наведенні */
+       }
+
+       /* Стилі для кнопки */
+       .category-button {
+           width: 100%; /* Розтягується на всю ширину блоку */
+           padding: 0.75rem; /* Внутрішні відступи */
+           background-color: orange; /* Оранжевий фон */
+           color: #fff; /* Білий текст */
+           border: none; /* Без обводки */
+           border-radius: 0.3rem; /* Заокруглені краї */
+           font-size: 1rem; /* Розмір шрифту */
+           font-weight: bold; /* Жирний текст */
+           cursor: pointer; /* Курсор у вигляді руки */
+           transition: background-color 0.3s ease; /* Плавна зміна фону при наведенні */
+       }
+
+       .category-button:hover {
+           background-color: #e68a00; /* Темніший оранжевий фон при наведенні */
+       }
+
+</style>
+
+<div class="content-wrapper">
+
+    <div class="category-block">
+        <h2>Категорії</h2>
+        <ul>
+            <li class="main-menu__item"><a href="/news/">Головна</a></li>
+            <li class="main-menu__item"><a href="/news-war/">Війна</a></li>
+            <li class="main-menu__item"><a href="/news-ukraine/">Україна</a></li>
+            <li class="main-menu__item"><a href="/news-politics/">Політика</a></li>
+            <li class="main-menu__item"><a href="/news-world/">Світ</a></li>
+            <li class="main-menu__item"><a href="/news-ecology/">Екологія</a></li>
+            <li class="main-menu__item"><a href="/news-insurance/">Страхування</a></li>
+            <li class="main-menu__item"><a href="/news-covid/">Коронавірус</a></li>
+            <li class="main-menu__item"><a href="/news-weapon/">Зброя</a></li>
+            <li class="main-menu__item"><a href="/news-science/">Наука</a></li>
+            <li class="main-menu__item"><a href="/news-technology/">Техно і зв'язок</a></li>
+            <li class="main-menu__item"><a href="/news-health/">Здоров'я</a></li>
+            <li class="main-menu__item"><a href="/news-kyiv/">Новини Києва</a></li>
+            <li class="main-menu__item"><a href="/news-lviv/">Новини Львова</a></li>
+            <li class="main-menu__item"><a href="/news-dnipro/">Новини Дніпра</a></li>
+            <li class="main-menu__item"><a href="/news-harkov/">Новини Харкова</a></li>
+            <li class="main-menu__item"><a href="/news-odessa/">Новини Одеси</a></li>
+            <li class="main-menu__item"><a href="/news-attractions/">Цікавинки</a></li>
+        </ul>
+    </div>
+
+    <div class="news-section">
+        <h1>Останні новини агресії РФ проти України</h1>
+        <ul class="news-list">
+            {% for news in news_war_list %}
+            <li class="news-item">
+                <picture>
+                    <img src="{{ news.img_url }}">
+                </picture>
+                <div class="news-content">
+                    <a href="{{ news.url }}" target="_blank">
+                        <h3>{{ news.title }}</h3>
+                    </a>
+                    <br>
+                    <p class="news-time">{{ news.time }}</p> <!-- Дата тепер розміщена тут -->
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <div class="pagination-container">
+            {% if current_page > 1 %}
+            <a href="?page={{ current_page - 1 }}&size={{ page_size }}" class="pagination-button">Назад</a>
+            {% endif %}
+
+            <h3 class="pagination-info">Сторінка {{ current_page }} з {{ total_pages }}</h3>
+
+            {% if current_page < total_pages %}
+            <a href="?page={{ current_page + 1 }}&size={{ page_size }}" class="pagination-button">Далі</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

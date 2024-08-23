@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
   'market',
   'example',
+  'captcha',
+  'rest_framework',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -144,3 +146,5 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600
 
 
+RECAPTCHA_PUBLIC_KEY = '6LfS5x8UAAAAAI9fF4nE9O8s8_B2z8lL7X12ABCD'
+RECAPTCHA_PRIVATE_KEY = '6LfS5x8UAAAAAL9dJ-NqY0Z8g_f8BX4xY7z3WXYZ'

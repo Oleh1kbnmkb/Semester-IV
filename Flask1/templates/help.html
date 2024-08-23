@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<style>
+    body {
+        background-color: #e0e0e0;
+    }
+
+    header {
+        background-color: #000;
+        color: #fff;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        margin: 1rem;
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .header-logo img {
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+        border-radius: 0.3rem;
+    }
+
+    header .header-logo {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    header .nav {
+        display: flex;
+        gap: 1rem;
+    }
+
+    header .nav-item {
+        list-style: none;
+    }
+
+    header .nav-link {
+        background-color: #fff;
+        color: #000;
+        font-weight: bold;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.3rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        font-size: 1rem;
+    }
+
+    header .nav-link:hover {
+        background-color: #f0f0f0;
+    }
+
+    .support-text {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 2rem 0;
+        color: #333;
+    }
+
+
+    .support-jar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .support-jar img {
+        width: 500px;
+        height: auto;
+    }
+
+
+    .support-button {
+        display: flex;
+        justify-content: center;
+        margin-top: -1rem;
+    }
+
+    .support-button a {
+        background-color: #ff6600;
+        color: #fff;
+        font-weight: bold;
+        padding: 1rem 3rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .support-button a:hover {
+        background-color: #ff8533;
+    }
+</style>
+
+<header class="bg-dark text-light py-3 px-4 rounded mb-5 mx-5 my-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="/" class="header-logo">
+                <img src="{{ url_for('static', filename='news3.png') }}" alt="YourBrand Logo">
+                UKRAINE
+            </a>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a href="/" class="nav-link">Головна</a></li>
+                    <li class="nav-item"><a href="/news/" class="nav-link">Новини</a></li>
+                    <li class="nav-item"><a href="/about_us/" class="nav-link">Про Нас</a></li>
+                    <li class="nav-item"><a href="/help/" class="nav-link">Підтримка</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<div class="container">
+    <div class="support-text">Підтримай нас копійочкою</div>
+    <div class="support-jar">
+        <img src="https://static.vecteezy.com/system/resources/previews/019/632/930/non_2x/3d-minimal-money-saving-concept-depositing-money-money-management-concept-coins-falling-into-a-glass-jar-3d-illustration-free-png.png" alt="Прозора баночка з монетками">
+    </div>
+    <div class="support-button">
+        <a href="#">Підтримати</a>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+</body>
+
+<footer class="py-5 bg-dark text-light mx-3 my-3 rounded">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
+            <div class="col mb-3">
+                <a href="/" class="d-flex align-items-center mb-3 link-light text-decoration-none">
+                    <img src="{{ url_for('static', filename='news1.png') }}" alt="YourBrand Logo" width="100" height="100" class="me-2">
+                </a>
+            </div>
+
+            <div class="col mb-3">
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Home</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Features</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Blog</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Help Center</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Privacy Policy</a>
+                    </li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Terms of Service</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Twitter</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Instagram</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">Facebook</a></li>
+                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white fw-bold">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
