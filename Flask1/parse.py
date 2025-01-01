@@ -5,20 +5,46 @@ from bs4 import BeautifulSoup
 def get_news():
   response = requests.get("https://hromadske.ua/news")
   soup = BeautifulSoup(response.content, "html.parser")
-
-  headers = soup.select('.l-feed-list .c-feed-item')
   result = []
+  all_urls = soup.select(".l-feed-list .c-feed-item > a")
+  default_img_url = "https://ksoe.com.ua/assets/ed3d37a5/5cf0de66aa9f4.jpg"
 
-  for news in headers:
-    time = news.select_one(".c-feed-item__time").text
-    title = news.select_one("a > h3").text
-    url = news.select_one("a")['href']
+  for a_tag in all_urls:
+    url = a_tag['href']
+    request = requests.get(url)
+    page_soup = BeautifulSoup(request.content, "html.parser")
+
+    title = page_soup.select_one(".c-heading__title").text.strip()
+    img_tag = page_soup.select_one(".c-post-image__picture.c-post-image__picture > img")
+    desc = page_soup.select_one(".o-lead > p")
+    desc_text = desc.text.strip() if desc else "No description available"
+
+    # Обмеження кількості символів для description до 229
+    if len(desc_text) > 229:
+      desc_text = desc_text[:229]  # Обрізаємо текст до 229 символів
+
+    time_tag = page_soup.select_one(".c-post-header__date")
+    if time_tag:
+      time_text = time_tag.text.strip()
+      time_only = time_text[-5:]
+    else:
+      time_only = "No time available"
+
+    if img_tag and 'src' in img_tag.attrs:
+      img_url = img_tag['src']
+      if not img_url.startswith("http"):
+        img_url = "https://hromadske.ua" + img_url  # Додаємо домен, якщо URL відносний
+    else:
+      img_url = default_img_url
 
     news_obj = {
-      "time": time,
+      "time": time_only,
       "title": title,
       "url": url,
+      "description": desc_text,
+      "image_url": img_url
     }
+
     result.append(news_obj)
 
   return result
@@ -469,6 +495,61 @@ def get_news_attractions():
       "title": title,
       "url": url,
       "time": time,
+    }
+    result.append(news_obj)
+
+  return result
+
+
+
+def get_inter():
+  response = requests.get("https://ua.korrespondent.net/interview/")
+  soup = BeautifulSoup(response.content, "html.parser")
+  result = []
+
+  headers = soup.select('.unit-rubric .article.article_rubric_top')
+
+  for inter in headers[:7]:
+    title = inter.select_one(".article__title").text.strip()
+    url = inter.select_one("a")['href']
+    img_tag = inter.select_one(".article__img-link > img")
+    img_url = (
+      img_tag.get('data-src') or
+      img_tag.get('data-href') or
+      img_tag.get('src') if img_tag else None
+    )
+
+    news_obj = {
+      "img_url": img_url,
+      "title": title,
+      "url": url
+    }
+    result.append(news_obj)
+
+  return result
+
+
+def get_plot():
+  response = requests.get("https://ua.korrespondent.net/special/1657-suizhety")
+  soup = BeautifulSoup(response.content, "html.parser")
+  result = []
+
+  headers = soup.select('.articles-list .article.article_rubric_top')
+
+  for plot in headers[:5]:
+    title = plot.select_one(".article__title > h3").text.strip()
+    url = plot.select_one("a")['href']
+    img_tag = plot.select_one(".article__img-link > img")
+    img_url = (
+      img_tag.get('data-src') or
+      img_tag.get('data-href') or
+      img_tag.get('src') if img_tag else None
+    )
+
+    news_obj = {
+      "img_url": img_url,
+      "title": title,
+      "url": url
     }
     result.append(news_obj)
 

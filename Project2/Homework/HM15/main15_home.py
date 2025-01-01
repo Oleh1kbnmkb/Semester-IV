@@ -1,6 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, BackgroundTasks
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 import uvicorn
 from typing import List
 from pathlib import Path

@@ -3,169 +3,613 @@
 {% load static %}
 
 
+
 <style>
-.c-main-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 auto;
-    padding: 1rem 4rem;
-    position: relative;
+     .container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.news1 {
+  margin-left: 96px;
+  margin-top: 122px;
+  gap: 17px;
+}
+.news1 .news1-text {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: left;
+  margin-top: 17px;
+  width: 568px;
+}
+
+.news1 .news-content {
+  display: flex;
+  gap: 85px;
+  margin-top: 0;
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 13px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.news2 {
+  display: flex;
+  margin-left: 71px;
+  gap: 107px;
+}
+.news2 .news-text {
+  margin-top: 0;
+  white-space: nowrap;
+  margin-top: 111px;
+  color: var(--text-color);
+  font-family: Jomhuria;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.news2 .news-link {
+  margin-left: 234px;
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration-line: underline;
+  white-space: nowrap;
+  margin-top: 123px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.news2 .news-link:hover {
+  transform: translateY(-1px);
+}
+
+.card .item {
+  display: flex;
+  position: relative;
+  margin-left: -607px;
+  width: 716.94px;
+  margin-bottom: -136px;
+  margin-top: 173px;
+  gap: 24px;
+}
+
+.card .item:nth-of-type(1) h3 {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(33, 96, 255);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .item:nth-of-type(2) h3 {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(148, 3, 5);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .item:nth-of-type(3) h3 {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(53, 139, 7);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .item h4 {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: left;
+  width: 407.49px;
+}
+
+.card .item p {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 13px;
+  text-align: left;
+  position: absolute;
+  bottom: -7px;
+  margin-top: 0;
+}
+
+.background-wrapper {
+  background: var(--wrapper);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 644px;
+
+}
+
+.top-container {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 105px;
+  margin-left: 201px;
+}
+
+.news5-content {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-bottom: 13px;
+}
+
+.news5 {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 0;
+  margin-left: 79px;
+}
+
+.news5-image {
+  width: 678px;
+  height: 525.45px;
+}
+
+.news5-content h2 {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 29px;
+  text-align: left;
+  width: 503px;
+  margin-bottom: 36px;
+}
+
+.news5-content p {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 13px;
+  text-align: left;
+}
+
+.top-content {
+  display: flex;
+  gap: 859px;
+  margin-left: 280px;
+}
+
+.top-content .news-text {
+  color: var(--text-color);
+  font-family: Jomhuria;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 48px;
+  margin-bottom: 16px;
+  margin-top: 17px;
+}
+
+.top-content .news-link {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-top: 28px;
+  text-decoration-line: underline;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.top-content .news-link:hover {
+  transform: translateY(-1px);
 }
 
 
-.c-main-grid__lead-container {
-    width: 70%;
-    margin-right: 3rem;
-    margin-left: 2rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem; /* Space between images */
+.item-top {
+  position: relative;
 }
 
-
-/* Lead image section */
-.c-main-grid__lead {
-    width: 70%;
-    margin-right: 3rem;
-    margin-left: 2rem;
-    position: relative;
+.text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 20px;
+  margin-left: 26px;
 }
 
-
-.c-card__picture {
-    margin: 0;
+.text-overlay h4 {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: left;
+  width: 374px;
 }
 
-
-
-
-.c-card__picture img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
+.text-overlay p {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: left;
 }
 
-
-.c-main-grid__feed {
-    width: 35%;
-    margin-right: 3rem;
-}
-
-.c-feed {
-    position: relative;
-    background-color: #656565;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-}
-
-.c-feed__title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #555;
-}
-
-
-.c-feed:before {
-    content: "";
-    display: block;
-    height: 5px;
-    background-color: #ff6600;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    border-radius: 8px 8px 0 0;
-}
-
-.c-feed__item {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #555;
-}
-
-.c-card__caption h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.c-card__date {
-    font-size: 0.8rem;
-    color: #bbb;
-}
-
-.c-feed__footer {
-    margin-top: 1rem;
-    background-color: #ff6600;
-    border: none;
-    border-radius: 0.5rem;
-    width: 100%;
-    text-align: center;
-}
-
-.c-feed__button {
-    display: block;
-    padding: 1rem 0;
-    color: white;
-    text-decoration: none; /* Забезпечує відсутність підкреслення */
-    font-weight: bold;
-    cursor: default; /* Прибирає курсор руки */
-}
-
-.c-feed__button:hover {
-    color: white; /* Залишається білим при наведенні */
-    background-color: #ff6600; /* Залишається того ж кольору при наведенні */
-    text-decoration: none; /* Залишається без підкреслення */
-    cursor: default; /* Прибирає курсор руки при наведенні */
+.news6-7-container .item-top:nth-of-type(1) {
+  margin-bottom: 23px;
 }
 
 
 
+
+.current-news {
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-left: 220px;
+}
+.current-content {
+  display: flex;
+  align-items: center;
+  gap: 988px;
+}
+.current-content h2 {
+  color: var(--text-color);
+  font-family: Jomhuria;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 48px;
+  text-align: left;
+}
+.current-content .all-news-link {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+  text-decoration-line: underline;
+  transition: color 0.3s ease, transform 0.3s ease;
+  margin-top: -4px;
+}
+.current-content .all-news-link:hover {
+  transform: translateY(-1px);
+}
+
+.news-grid {
+  display: flex;
+  gap: 51px;
+  margin-top: -24px;
+}
+
+.news-item {
+  display: flex;
+  position: relative;
+  gap: 10px;
+}
+.news-item .title {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: left;
+  width: 427px;
+}
+.content-item p {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 13px;
+  text-align: left;
+  position: absolute;
+  bottom: -7px;
+  margin-top: 0;
+}
+
+.current-container1 .news-item:nth-of-type(1) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(148, 3, 5);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.current-container1 .news-item:nth-of-type(2) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(33, 96, 255);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.current-container1 .news-item:nth-of-type(3) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(206, 153, 8);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.current-container2 .news-item:nth-of-type(1) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(53, 139, 7);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.current-container2 .news-item:nth-of-type(2) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(33, 96, 255);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.current-container2 .news-item:nth-of-type(3) .filters {
+  color: rgb(255, 255, 255);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  background: rgb(148, 3, 5);
+  width: 104.17px;
+  height: 21.47px;
+  margin-top: -1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-container1 .news-item{
+  margin-bottom: 35px;
+}
+.current-container2 .news-item{
+  margin-bottom: 35px;
+}
+
+.current-container1 .news-item img {
+  margin-top: -1px;
+}
+.current-container2 .news-item img {
+  margin-top: -1px;
+}
 </style>
-<br>
-<div class="c-main-grid">
-    <div class="c-main-grid__lead-container">
-        <picture class="c-card__picture">
-            <img src="{% static 'economic.png' %}" alt="Economic Image">
-        </picture>
 
-        <picture class="c-card__picture">
-            <img src="{% static 'pictures.png' %}" alt="Second Economic Image">
-        </picture>
+<div class="container">
+    <div class="news1">
+        <img src="{% static 'images/news1.svg' %}" alt="NEWS" class="news1-image">
+        <h3 class="news1-text">російська «криптоблогерка» виманила в інвесторів $22 млн та передала їх на ЗСУ. Тепер її судять</h3>
+        <div class="news-content">
+            <p class="desc1">Валерія Федякіна</p>
+            <p class="desc1">bitmama888 / Instagram</p>
+        </div>
     </div>
-
-
-    <div class="c-main-grid__feed">
-        <aside class="c-feed c-main-grid__feed-body">
-            <p class="c-feed__title">Останні новини</p>
-            {% for news in last_news %}
-            <ul class="c-feed__list">
-                <li class="c-feed__item">
-                    <article class="c-card c-card--plain c-feed__card">
-                        <div class="c-card__caption">
-                            <h3>{{ news.title }}</h3>
-                            <time class="c-card__date">{{ news.time }}</time>
-                        </div>
-                    </article>
-                </li>
-            </ul>
-            {% endfor %}
-            <button class="c-feed__footer">
-                <a href="news/" class="c-button c-feed__button">Всі новини</a>
-            </button>
-        </aside>
+    <div class="news2">
+        <h1 class="news-text">Resent News</h1>
+        <a href="/news/" class="news-link">All Resent News</a>
+    </div>
+    <div class="card">
+        <div class="item">
+            <img src="{% static 'images/news2.svg' %}" alt="NEWS2" class="news2-image">
+            <div class="content">
+                <h3>Society</h3>
+                <h4>Власника собаки, який загриз лебедя в Івано-Франківську, мобілізували до ЗСУ — міський голова</h4>
+                <p>25 жовтня 2024 00:43</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'images/news3.svg' %}" alt="NEWS3" class="news3-image">
+            <div class="content">
+                <h3>War</h3>
+                <h4>Відправили за ґрати за ухилення від мобілізації: у Києві ухвалили перші вироки військовозобов’язаним</h4>
+                <p>25 жовтня 2024 19:06</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'images/news4.svg' %}" alt="NEWS4" class="news4-image">
+            <div class="content">
+                <h3>Politics</h3>
+                <h4>«росіяни воюють проти стареньких хворих у памперсах». Де тепер люди з розбомбленого пансіонату в Сумах</h4>
+                <p>09 жовтня 2024 16:25</p>
+            </div>
+        </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="background-wrapper">
+    <div class="top-content">
+        <h1 class="news-text">Top News</h1>
+        <a href="/news/" class="news-link">All Resent News</a>
+    </div>
+    <div class="top-container">
+        <div class="news5">
+            <img src="{% static 'images/news5.svg' %}" alt="NEWS5" class="news5-image">
+            <div class="news5-content">
+                <h2>Генсек ООН у російській Казані. Що пише світова преса про ручкання Гутерреша з путіним</h2>
+                <p>25 жовтня 2024 15:13</p>
+            </div>
+        </div>
+        <div class="news6-7-container">
+            <div class="item-top">
+              <img src="{% static 'images/news6.svg' %}" alt="NEWS6" class="news6-image">
+              <div class="text-overlay">
+                <h4>Чим живуть квірні люди у прифронтовому місті: репортаж із Запоріжжя</h4>
+                <p>26 жовтня 2024 17:00</p>
+              </div>
+            </div>
+            <div class="item-top">
+              <img src="{% static 'images/news7.svg' %}" alt="NEWS7" class="news7-image">
+              <div class="text-overlay">
+                <h4>Грузія йде на «історичні вибори»: головне про партії та їхні шанси</h4>
+                <p>25 жовтня 2024 17:00</p>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
 
+<div class="current-news">
+    <div class="current-content">
+        <h2>Current News</h2>
+        <a href="/news/" class="all-news-link">All Recent News</a>
+    </div>
+    <div class="news-grid">
+        <div class="current-container1">
+            <div class="news-item">
+                <img src="{% static 'images/current-news1.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">War</h3>
+                    <h3 class="title">Від Пхеньяна до Курська: чому КНДР відправляє війська воювати проти України і що з цим робити</h3>
+                    <p>13 жовтня 2024 18:00</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="{% static 'images/current-news2.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">Society</h3>
+                    <h3 class="title">Від Леонтовича до Ясіра Арафата: як Миколаївський зоопарк переживає третю війну і став притулком для крокодила з ванної</h3>
+                    <p>20 жовтня 2024 07:00</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="{% static 'images/current-news3.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">Economy</h3>
+                    <h3 class="title">Карпатський Прованс і готелі майбутнього: куди вкладаються українські інвестори під час війни</h3>
+                    <p>02 жовтня 2024 17:01</p>
+                </div>
+            </div>
+        </div>
+        <div class="current-container2">
+            <div class="news-item">
+                <img src="{% static 'images/current-news4.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">Politics</h3>
+                    <h3 class="title">Жовтневий сюрприз: путін і Меланія несподівано заважають Трампу знову спробувати стати президентом</h3>
+                    <p>18 жовтня 2024 08:27</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="{% static 'images/current-news5.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">Society</h3>
+                    <h3 class="title">Зберегти час і здоров'я: чому ранній скринінг слуху є необхідним для розвитку дітей</h3>
+                    <p>25 жовтня 2024 07:00</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="{% static 'images/current-news6.svg' %}" alt="News Image">
+                <div class="content-item">
+                    <h3 class="filters">War</h3>
+                    <h3 class="title">Битва за Вугледар: як росія поступово захопила українську фортецю на півдні Донбасу та які були наслідки</h3>
+                    <p>15 жовтня 2024 16:41</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <br>
 <br>
 <br>
-<br>
-<br>
-
 {% endblock content %}

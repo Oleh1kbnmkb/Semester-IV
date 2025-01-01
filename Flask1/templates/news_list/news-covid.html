@@ -3,294 +3,389 @@
 
 
 <style>
-    /* Контейнер для пагінації */
 .pagination-container {
-    display: flex;
-    justify-content: flex-start; /* Вирівнювання вліво */
-    align-items: center;
-    margin: 20px 0; /* Відступи зверху та знизу */
-    padding-left: 20px; /* Додатковий відступ зліва для вирівнювання */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0;
+  padding-left: 20px;
+  margin-left: 40px;
 }
 
-/* Кнопки пагінації */
+
 .pagination-button {
-    text-decoration: none; /* Видалити підкреслення */
-    color: #ffffff; /* Білий колір тексту */
-    background-color: #ff6600; /* Оранжевий фон */
-    border: none;
-    padding: 10px 20px; /* Відступи всередині кнопки */
-    margin: 0 10px; /* Відступи між кнопками */
-    border-radius: 5px; /* Закруглені кути */
-    font-size: 16px; /* Розмір шрифту */
-    font-weight: bold; /* Жирний шрифт */
-    display: inline-block; /* Переконайтесь, що кнопки розташовані в ряд */
-    text-align: center; /* Вирівнювання тексту по центру */
-    cursor: pointer; /* Курсор у вигляді руки */
-    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s; /* Анімація для фону, тіні і кольору тексту */
+  text-decoration: none;
+  color: #ffffff;
+  background: #6D95F9;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-/* При наведенні на кнопку */
+
 .pagination-button:hover {
-    background-color: #cc5200; /* Темніший оранжевий колір фону */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тінь */
-    color: #ffffff; /* Білий колір тексту при наведенні */
-    outline: none; /* Видалити обведення при фокусуванні */
-    text-decoration: none; /* Переконайтесь, що немає підкреслення */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+background: #507df0b4;
+color: #ffffff;
+outline: none;
+text-decoration: none;
 }
 
-/* При фокусуванні на кнопці */
-.pagination-button:focus {
-    outline: none; /* Видалити обведення при фокусуванні */
-    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.3); /* Легка тінь для фокусу */
-    color: #ffffff; /* Білий колір тексту при фокусуванні */
-}
 
-/* Інформація про сторінку */
 .pagination-info {
-    font-size: 18px; /* Збільшений розмір шрифту */
-    font-weight: bold; /* Жирний шрифт */
-    color: var(--secondary-color); /* Темно-сірий колір тексту */
-    margin: 0 10px; /* Відступи між текстом і кнопками */
+margin: 0 10px;
+margin-top: 0.15rem;
+color: var(--text-color);
+font-family: IBM Plex Serif;
+font-size: 17px;
+font-weight: 500;
+line-height: 25px;
+letter-spacing: 0%;
+text-align: left;
 }
 
 
 
-
-
-/* Загальний стиль для контейнера новин та категорій */
-.content-wrapper {
-    display: flex; /* Використання flex для розташування блоків поряд */
-    align-items: flex-start; /* Вирівнювання блоків по верхньому краю */
-    margin-top: 2rem; /* Відступ зверху для підняття блоків */
-    gap: 2rem; /* Відступ між блоком категорій та новинами */
+.breadcrumb {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  text-align: left;
 }
 
-/* Стиль для секції новин */
-.news-section {
-    flex-grow: 1; /* Блок новин займає залишковий простір */
-    max-width: 75%; /* Максимальна ширина блоку новин */
+.news-header {
+  max-width: 1246px;
+  margin: 0 auto;
 }
 
-.news-section h1 {
-    color: var(--secondary-color);;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: left; /* Вирівнювання заголовка по лівому краю */
-    position: relative;
+.vertical-line {
+  width: 6px;
+  height: 40px;
+  background-color: #6D95F9;
+  margin-top: 3px;
 }
 
-/* Оранжева лінія перед заголовком */
-.news-section h1::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 100%;
-    background-color: #ff6600; /* Оранжевий колір лінії */
-    position: absolute;
-    left: -1rem; /* Відступ зліва */
-    top: 0;
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
 }
 
-.news-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.news-title {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 39px;
+  font-weight: 500;
+  line-height: 51px;
+  text-align: left;
+  margin: 0;
 }
+
+.news-all p {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: left;
+  margin-top: 15px;
+  margin-left: 9px;
+}
+
+.news-filter-btn {
+  background: #6D95F9;
+  position: relative;
+  display: flex;
+  margin-left: 67px;
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+}
+
+.news-all-btn {
+  width: 85px;
+  height: 37px;
+  background: #6D95F9;
+  border-radius: 3px;
+  color: white;
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.chevron1 {
+  color: white;
+  margin-left: -29px;
+  margin-top: 7px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  background: white;
+  border: 1px solid #6D95F9;
+  border-radius: 3px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  text-align: left;
+  min-width: 100px;
+  display: none;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.dropdown-menu ul {
+  padding: 0px 27px 0px 7px;
+  list-style: none;
+}
+
+.dropdown-menu li {
+  padding: 0px 5px 3px 3px;
+  font-family: IBM Plex Serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  width: 148px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: #000000;
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+
 
 .news-item {
-    display: flex;
-    padding: 1rem 0;
-    position: relative; /* Додати позиціювання для псевдоелемента */
-    align-items: flex-start; /* Вирівнювання контенту по верхньому краю */
+  display: flex;
+  gap: 22px;
+  position: relative;
+  margin-top: 14px;
 }
-
 
 .news-item::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; /* Початок лінії зліва */
-    bottom: 0; /* Лінія розташована внизу елемента */
-    width: 90%; /* Ширина лінії зменшена на 10% від ширини контейнера */
-    height: 2px; /* Товщина лінії */
-    background-color: #000; /* Колір лінії */
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: 1px solid var(--btn);
 }
 
-.news-item:last-child {
-    border-bottom: none; /* Без лінії в кінці списку */
-}
 
-.news-item picture {
-    flex-shrink: 0;
-    width: 100px; /* Ширина для фото */
-    height: 100px;
-    margin-right: 1rem;
-}
-
-.news-item picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px; /* Заокруглення кути фото */
-}
-
-.news-content {
-    display: flex;
-    flex-direction: column; /* Вертикальне розміщення тексту та дати */
-    flex-grow: 1;
-}
-
-.news-content h3 {
-    margin: 0;
-    color: var(--secondary-color);;
-    font-size: 1.2rem;
+.news-item img {
+  width: 99px;
+  height: 95px;
+  border-radius: 3px;
+  margin-bottom: 9px;
+  object-fit: cover;
 }
 
 .news-content a {
-    text-decoration: none;
-    color: #007bff;
-    transition: color 0.3s ease;
+  display: block;
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: left;
+  width: 635px;
+  text-decoration-line: none;
+  white-space: normal;
+  margin-bottom: 18px;
 }
 
-.news-content a:hover {
-    color: #0056b3;
+.news-content .news-time {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 13px;
+  text-align: left;
 }
 
-.news-item .news-time {
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 0.5rem; /* Відступ зверху для дати */
-    align-self: flex-start; /* Вирівнювання дати по лівому краю */
-    margin-left: 0.5rem; /* Відступ зліва для дати */
+.content-wrapper {
+  display: flex;
+  max-width: 1321px;
+  margin: 0 auto;
+  margin-left: 181px;
+  margin-top: 37px;
+  gap: 201px;
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  float: right;
+  margin-top: -95px;
+  gap: 40px;
+}
+
+
+.news-section .news-list {
+  list-style: none;
 }
 
 
 
-   /* Основний стиль для блоку категорій */
-   .category-block {
-       background-color: #656565; /* Темно-сірий фон */
-       color: #fff; /* Білий текст */
-       width: 15%; /* Менша ширина блоку */
-       border-radius: 0.5rem; /* Заокруглені краї */
-       margin-right: 1rem; /* Відступ справа для розміщення блоку зліва */
-       margin-left: 5rem; /* Відступ зліва */
-       padding: 1rem; /* Внутрішні відступи */
-       position: relative; /* Позиціювання для використання псевдоелемента */
-   }
+.interview-section {
+  width: 285.02px;
+  float: left;
+}
 
-   /* Оранжева лінія зверху */
-   .category-block::before {
-       content: '';
-       display: block;
-       height: 4px; /* Товщина лінії */
-       background-color: #ff6600; /* Оранжевий колір */
-       position: absolute;
-       top: 0;
-       left: 0;
-       right: 0;
-       border-radius: 0.5rem 0.5rem 0 0; /* Заокруглені краї зверху */
-   }
 
-   /* Заголовок блоку */
-   .category-block h2 {
-       margin: 0 0 1rem 0; /* Відступи навколо заголовка */
-       font-size: 1.5rem; /* Розмір шрифту */
-       font-weight: bold; /* Жирний текст */
-   }
+.interview-section h2 {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+}
 
-   /* Стилі для списку новин */
-   .category-block ul {
-       list-style: none; /* Видалення маркерів списку */
-       padding: 0; /* Відсутність внутрішніх відступів */
-       margin: 0; /* Відсутність зовнішніх відступів */
-   }
+.interview-section h2::after {
+  content: '';
+  display: block;
+  width: 100%;
+  border: 1px solid rgb(255, 24, 24);
+  margin-top: 4px;
+}
 
-   .category-block .main-menu__item {
-       border-bottom: 1px solid #000; /* Тонка лінія роздільника */
-       padding: 0.5rem 0; /* Відступи для елементів списку */
-   }
+.interview-section ul {
+  list-style: none;
+  gap: 5px;
+}
 
-   .category-block .main-menu__item:last-child {
-       border-bottom: none; /* Вимкнення лінії для останнього елемента */
-   }
+.interview-section li {
+  display: flex;
+  margin-left: -38px;
+  gap: 9px;
+  margin-top: 10px;
+}
 
-   .category-block .main-menu__item a {
-       color: #fff; /* Білий текст */
-       text-decoration: none; /* Видалення підкреслення */
-       display: block; /* Блоковий відображення для зайняття всієї ширини */
-       padding: 0.5rem; /* Внутрішні відступи */
-       transition: background-color 0.3s ease; /* Плавна зміна фону при наведенні */
-   }
+.interview-section li {
+  display: flex;
+  margin-left: -38px;
+  gap: 9px;
+  margin-top: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--btn);
+}
 
-   .category-block .main-menu__item a:hover {
-       background-color: #444; /* Темніший фон при наведенні */
-   }
+.interview-section li:last-child {
+  border-bottom: none;
+}
 
-   /* Стилі для кнопки */
-   .category-button {
-       width: 100%; /* Розтягується на всю ширину блоку */
-       padding: 0.75rem; /* Внутрішні відступи */
-       background-color: orange; /* Оранжевий фон */
-       color: #fff; /* Білий текст */
-       border: none; /* Без обводки */
-       border-radius: 0.3rem; /* Заокруглені краї */
-       font-size: 1rem; /* Розмір шрифту */
-       font-weight: bold; /* Жирний текст */
-       cursor: pointer; /* Курсор у вигляді руки */
-       transition: background-color 0.3s ease; /* Плавна зміна фону при наведенні */
-   }
+.interview-section img {
+  width: 70px;
+  height: 50px;
+  object-fit: cover;
+}
 
-   .category-button:hover {
-       background-color: #e68a00; /* Темніший оранжевий фон при наведенні */
-   }
-
+.interview-section a {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: left;
+  width: 204px;
+  text-decoration: none;
+}
 </style>
 
-<div class="content-wrapper">
-
-    <div class="category-block">
-        <h2>Категорії</h2>
-        <ul>
-            <li class="main-menu__item"><a href="/news/">Головна</a></li>
-            <li class="main-menu__item"><a href="/news-war/">Війна</a></li>
-            <li class="main-menu__item"><a href="/news-ukraine/">Україна</a></li>
-            <li class="main-menu__item"><a href="/news-politics/">Політика</a></li>
-            <li class="main-menu__item"><a href="/news-world/">Світ</a></li>
-            <li class="main-menu__item"><a href="/news-ecology/">Екологія</a></li>
-            <li class="main-menu__item"><a href="/news-insurance/">Страхування</a></li>
-            <li class="main-menu__item"><a href="/news-covid/">Коронавірус</a></li>
-            <li class="main-menu__item"><a href="/news-weapon/">Зброя</a></li>
-            <li class="main-menu__item"><a href="/news-science/">Наука</a></li>
-            <li class="main-menu__item"><a href="/news-technology/">Техно і зв'язок</a></li>
-            <li class="main-menu__item"><a href="/news-health/">Здоров'я</a></li>
-            <li class="main-menu__item"><a href="/news-kyiv/">Новини Києва</a></li>
-            <li class="main-menu__item"><a href="/news-lviv/">Новини Львова</a></li>
-            <li class="main-menu__item"><a href="/news-dnipro/">Новини Дніпра</a></li>
-            <li class="main-menu__item"><a href="/news-harkov/">Новини Харкова</a></li>
-            <li class="main-menu__item"><a href="/news-odessa/">Новини Одеси</a></li>
-            <li class="main-menu__item"><a href="/news-attractions/">Цікавинки</a></li>
-        </ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="news-header">
+    <div class="breadcrumb">
+        <span>Головна</span> > <span>Новини</span>
     </div>
+    <div class="header-content">
+        <div class="vertical-line"></div>
+        <h1 class="news-title">Новини про COVID-19</h1>
+        <div class="news-all">
+            <button class="news-filter-btn">
+                <span class="news-all-btn">Всі</span>
+                <svg class="chevron1" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <div class="dropdown-menu hidden">
+                    <ul>
+                        <li><a href="/news/">Головна</a></li>
+                        <li><a href="/news-war/">Війна</a></li>
+                        <li><a href="/news-ukraine/">Україна</a></li>
+                        <li><a href="/news-politics/">Політика</a></li>
+                        <li><a href="/news-world/">Світ</a></li>
+                        <li><a href="/news-ecology/">Екологія</a></li>
+                        <li><a href="/news-insurance/">Страхування</a></li>
+                        <li><a href="/news-covid/">Коронавірус</a></li>
+                        <li><a href="/news-weapon/">Зброя</a></li>
+                        <li><a href="/news-science/">Наука</a></li>
+                        <li><a href="/news-technology/">Техно і зв'язок</a></li>
+                        <li><a href="/news-health/">Здоров'я</a></li>
+                        <li><a href="/news-kyiv/">Новини Києва</a></li>
+                        <li><a href="/news-lviv/">Новини Львова</a></li>
+                        <li><a href="/news-dnipro/">Новини Дніпра</a></li>
+                        <li><a href="/news-harkov/">Новини Харкова</a></li>
+                        <li><a href="/news-odessa/">Новини Одеси</a></li>
+                        <li><a href="/news-attractions/">Цікавинки</a></li>
+                    </ul>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
 
+<div class="content-wrapper">
     <div class="news-section">
-        <h1>Новини про COVID-19</h1>
         <ul class="news-list">
             {% for news in items_on_page %}
             <li class="news-item">
                 <picture>
-                    <img src="{{ news.img_url }}">
+                    <img src="{{ news.img_url }}" alt="Новина 1">
                 </picture>
                 <div class="news-content">
-                    <a href="{{ news.url }}" target="_blank">
-                        <h3>{{ news.title }}</h3>
-                    </a>
-                    <br>
-                    <p class="news-time">{{ news.time }}</p> <!-- Дата тепер розміщена тут -->
+                    <a href="{{ news.url }}" target="_blank">{{ news.title }}</a>
+                    <p class="news-time">{{ news.time }}</p>
                 </div>
             </li>
             {% endfor %}
         </ul>
-        <br>
         <br>
         <div class="pagination-container">
             {% if page > 1 %}
@@ -302,7 +397,52 @@
             {% endif %}
         </div>
     </div>
+
+    <div class="content-section">
+        <div class="interview-section">
+            <h2>Інтерв'ю &gt;&gt;</h2>
+            <ul>
+                {% for inter in news_inter %}
+                <li>
+                    <img src="{{ inter.img_url }}" alt="Воїн-мер Борисполя">
+                    <a href="{{ inter.url }}" target="_blank">{{ inter.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="interview-section">
+            <h2>Сюжет &gt;&gt;</h2>
+            <ul>
+                {% for plot in news_plot %}
+                <li>
+                    <img src="{{ plot.img_url }}" alt="Вторгнення Росії в Україну">
+                    <a href="{{ plot.url }}" target="_blank">{{ plot.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 
+<script>
+    const button = document.querySelector('.news-all-btn');
+const dropdown = document.querySelector('.dropdown-menu');
+
+button.addEventListener('click', () => {
+  dropdown.classList.toggle('hidden');
+  dropdown.classList.toggle('visible');
+});
+
+// Закриття меню при кліку за межами
+document.addEventListener('click', (e) => {
+  if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.add('hidden');
+    dropdown.classList.remove('visible');
+  }
+});
+</script>
+<br>
+<br>
+<br>
 {% endblock %}
 

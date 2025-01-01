@@ -3,66 +3,88 @@
 
 
 <style>
-/* Основний контейнер для сторінки About */
+ html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
 .c-about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
 }
 
-/* Зображення вгорі */
-.c-about__lead-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px; /* Невелике закруглення кутів */
-    margin-bottom: 2rem; /* Відступ між зображенням і текстовим блоком */
+.c-about__about .c-about__title {
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 65px;
+  text-align: center;
+
 }
 
-/* Блок з текстом, включаючи заголовок */
-.c-about__about {
-    max-width: 800px; /* Максимальна ширина для текстового блоку */
-    background-color: #656565; /* Сірий фон для текстового блоку */
-    padding: 2rem; /* Внутрішній відступ */
-    border-radius: 8px; /* Закруглені кути */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Легка тінь для об'ємності */
-    color: #fff; /* Білий колір тексту */
-    line-height: 1.6; /* Висота рядка для кращої читабельності */
-    text-align: center; /* Вирівнювання тексту по центру */
+.title-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  gap: 61px;
 }
 
-/* Заголовок всередині блоку */
-.c-about__title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem; /* Відступ між заголовком і текстом */
-}
-
-/* Стиль для абзаців всередині текстового блоку */
-.c-about__about p {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
+.title-container p {
+  width: 362px;
+  height: 186px;
+  color: var(--text-color);
+  font-family: IBM Plex Serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  text-align: left;
+  }
 </style>
-
-
+<br>
+<br>
+<br>
+<br>
 <div class="c-about">
     <picture class="c-about__lead-image">
         <img src="https://hromadske.ua/static/content/thumbs/1300x/7/f8/gzu2n3-b0ecffbba9a76b9e1530162424778f87.jpg"
-             alt="Що таке News Ukraine?" decoding="async" width="1300" height="445"></picture>
+             alt="Що таке News Ukraine?" decoding="async" width="1250" height="445"></picture>
     <br>
     <div class="c-about__about">
         <h1 class="c-about__title">Що таке News Ukraine?</h1>
-        <p>Ми провідна медіа-компанія, заснована у 2015 році з метою забезпечення якісного та
-            достовірного висвітлення подій в Україні та світі. Наша команда складається з професійних журналістів,
-            які прагнуть надавати об'єктивну та неупереджену інформацію для нашої аудиторії.
-        </p>
-        <br>
-        <p>Наша місія — забезпечити громадськість точною та актуальною інформацією, сприяти відкритому
-            діалогу та підтримувати обізнаність суспільства. Ми залишаємося незалежними від політичних та економічних впливів,
-            завжди надаючи пріоритет інтересам наших читачів.
-        </p>
+        <div class="title-container">
+            <p>Ми провідна медіа-компанія, заснована у 2015 році з метою забезпечення якісного та достовірного
+                висвітлення подій в Україні та світі.
+                Наша команда складається з професійних журналістів, які прагнуть надавати об'єктивну та неупереджену
+                інформацію для нашої аудиторії.
+            </p>
+            <p>Наша місія - забезпечити громадськість точною та актуальною інформацією, сприяти відкритому діалогу та
+                підтримувати обізнаність суспільства.
+                Ми залишаємося незалежними від політичних та економічних впливів, завжди надаючи пріоритет інтересам
+                наших читачів.
+            </p>
+        </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock content %}
